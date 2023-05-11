@@ -21,6 +21,7 @@ export class ConfigService {
 
   public authorization(login: any, password: any) : Observable<any> {
     var url = this.baseUrl + 'Users/login';
+    console.log('start request')
     return this.client.post<any>(url, {
       login: login,
       password: password,

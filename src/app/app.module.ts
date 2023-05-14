@@ -15,6 +15,10 @@ import { AuthComponent } from './authoriation-page/authoriation-page.component';
 import { ConfigService } from './config/config.service';
 import { RegistrationComponent } from './registration/registration.component';
 
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +34,7 @@ import { RegistrationComponent } from './registration/registration.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    TooltipModule.forRoot()
   ],
   providers: [ConfigService,],
   bootstrap: [AppComponent]

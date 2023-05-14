@@ -6,13 +6,14 @@
     </p>
     <div *ngIf="authForm.get('login')?.errors?.incorrect">Неверный логин и/или пароль</div>
     <div *ngIf="isSubmitted && formControls.login.errors" class="help-block">
-      <div *ngIf="formControls.login.errors.required">Email is required</div>
+      <div *ngIf="formControls.login.errors.required">Заполните поле логина</div>
     </div>
     <p [ngClass]="{ 'has-error': isSubmitted && formControls.password.errors }">
       <input name="passwordInput" type="password" placeholder="Пароль" formControlName="password">
     </p>
+    <div *ngIf="authForm.get('password')?.errors?.incorrect">Неверный логин и/или пароль</div>
     <div *ngIf="isSubmitted && formControls.password.errors" class="help-block">
-      <div *ngIf="formControls.password.errors.required">Password is required</div>
+      <div *ngIf="formControls.password.errors.required">Заполните поле пароля</div>
     </div>
     <p>
       <input type="submit" value="Войти">

@@ -1,1 +1,50 @@
-<p>registration works!</p>
+<div class="login">
+    <h2 class="login-header">Регистрация</h2>
+    <form name="authorize" [formGroup]="authForm" class="login-container" (ngSubmit)="signIn()">
+
+      <p [ngClass]="{ 'has-error': isSubmitted && formControls.name.errors }">
+        <input type="name" placeholder="Имя" formControlName="name">
+      </p>
+      <div *ngIf="isSubmitted && formControls.name.errors" class="help-block">
+        <div *ngIf="formControls.name.errors.required">Заполните поле имени!</div>
+      </div>
+
+      <p [ngClass]="{ 'has-error': isSubmitted && formControls.surname.errors }">
+        <input type="surname" placeholder="Фамилия" formControlName="surname">
+      </p>
+      <div *ngIf="isSubmitted && formControls.surname.errors" class="help-block">
+        <div *ngIf="formControls.surname.errors.required">Заполните поле фамилии!</div>
+      </div>
+
+      <p [ngClass]="{ 'has-error': isSubmitted && formControls.telephone.errors }">
+        <input type="telephone" placeholder="Телефон" formControlName="telephone">
+      </p>
+      <div *ngIf="authForm.get('telephone')?.errors?.incorrect">Введите другой телефон!</div>
+      <div *ngIf="isSubmitted && formControls.telephone.errors" class="help-block">
+        <div *ngIf="formControls.telephone.errors.required">Заполните поле телефона!</div>
+      </div>
+
+      <p [ngClass]="{ 'has-error': isSubmitted && formControls.login.errors }">
+        <input type="login" placeholder="Логин" formControlName="login">
+      </p>
+      <div *ngIf="authForm.get('login')?.errors?.incorrect">Введите другой логин!</div>
+      <div *ngIf="isSubmitted && formControls.login.errors" class="help-block">
+        <div *ngIf="formControls.login.errors.required">Заполните поле логина!</div>
+      </div>
+
+      <p [ngClass]="{ 'has-error': isSubmitted && formControls.password.errors }">
+        <input name="passwordInput" type="password" placeholder="Пароль" formControlName="password">
+      </p>
+      <div *ngIf="isSubmitted && formControls.password.errors" class="help-block">
+        <div *ngIf="formControls.password.errors.required">Заполните поле пароля!</div>
+      </div>
+
+      <p>
+        <input type="submit" value="Зарегистрироваться">
+      </p>
+      <p>
+        <button class="btn" [routerLink]="['/auth']">Назад</button>
+      </p>
+    </form>
+  </div>
+  

@@ -14,7 +14,7 @@ export class AuthComponent implements OnInit {
   authForm: FormGroup | any;
   isSubmitted  =  false;
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder, private configService: ConfigService ) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private configService: ConfigService ) { }
 
   ngOnInit() {
     this.authForm  =  this.formBuilder.group({
@@ -30,7 +30,7 @@ export class AuthComponent implements OnInit {
     if(this.authForm.invalid){
       return;
     }
-    this.authService.signIn(this.authForm.value);
+    
     var login = this.authForm.value.login;
     var password = this.authForm.value.password;
     this.configService.authorization(login, password).subscribe(response =>
@@ -38,8 +38,8 @@ export class AuthComponent implements OnInit {
         this.router.navigateByUrl('/applications');
         localStorage.setItem("AUTH_TOKEN", response.token);
       }, error => {
-        alert("Неверные данные");
         this.authForm.controls['login'].setErrors({'incorrect' : true});
+        this.authForm.controls['password'].setErrors({'incorrect' : true});
       });
   }
 }

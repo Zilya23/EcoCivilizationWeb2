@@ -23,7 +23,7 @@ export class ConfigService {
     var url = this.baseUrl + 'Users/login';
     return this.client.post<any>(url, {
       login: login,
-      password: password,
+      password: password
     })
   }
 
@@ -44,5 +44,13 @@ export class ConfigService {
   public getCities() : Observable<any[]> {
     var url = this.baseUrl + 'Cities';
     return this.client.get<any[]>(url)
+  }
+
+  public partApplicationUser(idUser: any, idApplication: any) :Observable<any> {
+    var url = this.baseUrl + 'ApplicationUsers';
+    return this.client.post<any>(url, {
+      idUser: idUser,
+      idApplication: idApplication
+    })
   }
 }

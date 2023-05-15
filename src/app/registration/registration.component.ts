@@ -13,36 +13,47 @@ import { ConfigService } from '../config/config.service';
 export class RegistrationComponent {
   authForm: FormGroup | any;
   isSubmitted  =  false;
+  cities: any[] = [];
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private configService: ConfigService ) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private configService: ConfigService ) {
+    this.configService.getCities()
+      .subscribe((cities:any[])=>{
+        
+        cities.forEach(city =>{
+        this.cities.push(city)
+      })
+    })
+   }
 
   ngOnInit() {
     this.authForm  =  this.formBuilder.group({
         name:['', Validators.required],
         surname:['', Validators.required],
         telephone:['', Validators.required],
-        idCity:['', Validators.required],
-        idGender:['', Validators.required],
         login: ['', Validators.required],
-        password: ['', Validators.required]
+        password: ['', Validators.required],
+        gender : ['', Validators.required],
+        city : ['', Validators.required],
     });
   }
 
   get formControls() { return this.authForm.controls; }
 
   signIn(){
-    // this.isSubmitted = true;
-    // if(this.authForm.invalid){
-    //   return;
-    // }
+
+    if(this.authForm.invalid){
+      return;
+    }
 
     var login = this.authForm.value.login.toString();
     var password = this.authForm.value.password.toString();
     var name = this.authForm.value.name;
     var surname = this.authForm.value.surname;
     var telephone = this.authForm.value.telephone.toString();
-    var idCity = 6;
-    var idGender = 2;
+    var idCity = this.authForm.value.city;
+    var idGender = this.authForm.value.gender;
+
+    console.log(idCity);
 
     this.configService.registration(name, surname, telephone, 
                                     idCity, idGender, login, password).subscribe(response =>

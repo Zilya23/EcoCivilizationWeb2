@@ -40,4 +40,9 @@ export class ConfigService {
       password: password
     })
   }
+
+  public getCities() : Observable<any[]> {
+    var url = this.baseUrl + 'Cities';
+    return this.client.get<any[]>(url)
+  }
 }

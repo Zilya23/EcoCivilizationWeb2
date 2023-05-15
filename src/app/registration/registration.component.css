@@ -54,6 +54,28 @@ body {
   font-size: 0.95em;
 }
 
+.login select {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+.login select:required:invalid {
+  color: gray;
+}
+.loginoption[value=""][disabled] {
+  display: none;
+}
+.login option {
+  color: black;
+}
+
 .login input[type="email"],
 .login input[type="password"] {
   background: #fff;

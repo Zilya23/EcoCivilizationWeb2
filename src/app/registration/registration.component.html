@@ -17,11 +17,32 @@
       </div>
 
       <p [ngClass]="{ 'has-error': isSubmitted && formControls.telephone.errors }">
-        <input type="telephone" placeholder="Телефон" formControlName="telephone">
+        <input type="tel" placeholder="Телефон" formControlName="telephone">
       </p>
       <div *ngIf="authForm.get('telephone')?.errors?.incorrect">Введите другой телефон!</div>
       <div *ngIf="isSubmitted && formControls.telephone.errors" class="help-block">
         <div *ngIf="formControls.telephone.errors.required">Заполните поле телефона!</div>
+      </div>
+
+      <p [ngClass]="{ 'has-error': isSubmitted && formControls.gender.errors }">
+        <select required formControlName="gender">
+          <option value="" disabled selected>Выберите пол</option>
+          <option value="1">Женский</option>
+          <option value="2">Мужской</option>
+        </select>
+      </p>
+      <div *ngIf="isSubmitted && formControls.gender.errors" class="help-block">
+        <div *ngIf="formControls.gender.errors.required">Укажите пол!</div>
+      </div>
+
+      <p [ngClass]="{ 'has-error': isSubmitted && formControls.city.errors }">
+        <select required formControlName="city">
+          <option value="" disabled selected>Выберите город</option>
+          <option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</option>
+        </select>
+      </p>
+      <div *ngIf="isSubmitted && formControls.city.errors" class="help-block">
+        <div *ngIf="formControls.city.errors.required">Укажите город!</div>
       </div>
 
       <p [ngClass]="{ 'has-error': isSubmitted && formControls.login.errors }">

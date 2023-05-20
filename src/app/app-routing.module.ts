@@ -10,8 +10,8 @@ import { RegistrationComponent } from './registration/registration.component';
 const routes: Routes = [
   { path: '', redirectTo: '/applications', pathMatch: 'full' },
   { path: 'auth', component: AuthComponent },
-  { path: 'applications', component: ListApplicationComponent, canActivate: [AuthGuard]},
-  { path: 'application/:id', component: ApplicationInfoComponent, canActivate: [AuthGuard]},
+  { path: 'applications', component: ListApplicationComponent},
+  { path: 'application/:id', component: ApplicationInfoComponent},
   { path: 'registration', component: RegistrationComponent},
 ];
 

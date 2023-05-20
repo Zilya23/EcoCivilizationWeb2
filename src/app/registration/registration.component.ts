@@ -18,7 +18,6 @@ export class RegistrationComponent {
   constructor(private router: Router, private formBuilder: FormBuilder, private configService: ConfigService ) {
     this.configService.getCities()
       .subscribe((cities:any[])=>{
-        
         cities.forEach(city =>{
         this.cities.push(city)
       })
@@ -30,8 +29,9 @@ export class RegistrationComponent {
         name:['', Validators.required],
         surname:['', Validators.required],
         telephone:['', Validators.required],
-        login: ['', Validators.required],
+        email: ['', Validators.required],
         password: ['', Validators.required],
+        repeatPassword: ['', Validators.required],
         gender : ['', Validators.required],
         city : ['', Validators.required],
     });
@@ -40,36 +40,39 @@ export class RegistrationComponent {
   get formControls() { return this.authForm.controls; }
 
   signIn(){
-
+    this.isSubmitted = true;
+    
     if(this.authForm.invalid){
       return;
     }
 
-    var login = this.authForm.value.login.toString();
+    var email = this.authForm.value.email.toString();
     var password = this.authForm.value.password.toString();
-    var name = this.authForm.value.name;
-    var surname = this.authForm.value.surname;
+    var name = this.authForm.value.name.toString();
+    var surname = this.authForm.value.surname.toString();
     var telephone = this.authForm.value.telephone.toString();
     var idCity = this.authForm.value.city;
     var idGender = this.authForm.value.gender;
+    var repeatPassword = this.authForm.value.repeatPassword.toString();
 
-    console.log(idCity);
-
-    this.configService.registration(name, surname, telephone, 
-                                    idCity, idGender, login, password).subscribe(response =>
-      {
-        alert("Успешно!");
-        this.router.navigateByUrl('/auth');
-      }, error => {
-          if(error.status === 404)
-          {
-            this.authForm.controls['login'].setErrors({'incorrect' : true});
+    if(password === repeatPassword) {
+      this.configService.registration(name, surname, telephone, 
+                    idCity, idGender, email, password).subscribe(response =>
+            {
+            alert("Успешно!");
+            this.router.navigateByUrl('/auth');
+            }, error => {
+            if(error.status === 404)
+            {
+            this.authForm.controls['email'].setErrors({'incorrect' : true});
             this.authForm.controls['telephone'].setErrors({'incorrect' : true});
-          }
-          else{
+            }
+            else{
             alert("Ошибка! Попробуйте еще раз")
-          }
-      }
-    );
+            }
+            }
+            );
+    }
+    this.authForm.controls['repeatPassword'].setErrors({'incorrect' : true});
   }
 }

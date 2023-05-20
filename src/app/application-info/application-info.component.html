@@ -36,29 +36,9 @@
           <div>{{applicationID["countUser"]}}</div>
         </li>
       </ol>
-      <p>Участников <span>{{applicationID.applicationUsers.length}}</span>  из <span>{{applicationID.countUser}}</span>:</p>
-      <progress max="{{applicationID.countUser}}" value="{{applicationID.applicationUsers.length}}">"{{applicationID.applicationUsers.length}}"  из  "{{applicationID.countUser}}"</progress>
-      <button>Участвовать!</button>
+      <p>Участников <span>{{partUser}}</span>  из <span>{{applicationID.countUser}}</span>:</p>
+      <progress max="{{applicationID.countUser}}" value="{{partUser}}"></progress>
+      <button (click)="partApplication()">Участвовать!</button>
   </div>
 </div>
 
-
-<!-- <div class="row">
-    <div class="leftcolumn">
-      <div class="card">
-        <div class="cardheaders">
-            <p>{{applicationID.name}}</p>
-        </div>
-        <div class="imgs">
-            <img class="listimg" *ngFor="let photoList of applicationID.photoApplications"
-                src={{photoList.photo}}>
-        </div>
-        <p class="description">{{applicationID["description"]}}</p>
-
-        <div>
-          <label>Участники:</label>
-            <progress max="{{applicationID.countUser}}" value="{{applicationID.applicationUsers.length}}">"{{applicationID.applicationUsers.length}}"  из  "{{applicationID.countUser}}"</progress>
-          </div>
-        </div>
-    </div>
-</div> -->

@@ -19,16 +19,16 @@ export class ConfigService {
     return this.client.get<any>(url)
   }
 
-  public authorization(login: any, password: any) : Observable<any> {
+  public authorization(email: any, password: any) : Observable<any> {
     var url = this.baseUrl + 'Users/login';
     return this.client.post<any>(url, {
-      login: login,
+      email: email,
       password: password
     })
   }
 
   public registration(name: any, surname: any, telephone: any, idCity: any, 
-                      idGender: any, login: any, password: any) : Observable<any> {
+                      idGender: any, email: any, password: any) : Observable<any> {
     var url = this.baseUrl + 'Users/registration';
     return this.client.post<any>(url, {
       name: name,
@@ -36,7 +36,7 @@ export class ConfigService {
       telephone: telephone, 
       idCity: idCity, 
       idGender: idGender,
-      login: login,
+      email: email,
       password: password
     })
   }
@@ -46,11 +46,9 @@ export class ConfigService {
     return this.client.get<any[]>(url)
   }
 
-  public partApplicationUser(idUser: any, idApplication: any) :Observable<any> {
+  public partApplicationUser(idApplication: any, token: any) :Observable<any> {
     var url = this.baseUrl + 'ApplicationUsers';
-    return this.client.post<any>(url, {
-      idUser: idUser,
-      idApplication: idApplication
-    })
+    var head = {'token': token};
+    return this.client.post<any>(url, {idApplication: idApplication}, {headers: head});
   }
 }

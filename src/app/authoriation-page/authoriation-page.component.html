@@ -1,12 +1,12 @@
 <div class="login">
   <h2 class="login-header">Авторизация</h2>
-  <form name="authorize" [formGroup]="authForm" class="login-container" (ngSubmit)="signIn()">
+  <form name="authorize" [formGroup]="authForm" class="email-container" (ngSubmit)="signIn()">
     <p [ngClass]="{ 'has-error': isSubmitted && formControls.login.errors }">
-      <input type="login" placeholder="Логин" formControlName="login">
+      <input type="email" placeholder="Email" formControlName="email">
     </p>
-    <div *ngIf="authForm.get('login')?.errors?.incorrect">Неверный логин и/или пароль</div>
-    <div *ngIf="isSubmitted && formControls.login.errors" class="help-block">
-      <div *ngIf="formControls.login.errors.required">Заполните поле логина</div>
+    <div *ngIf="authForm.get('email')?.errors?.incorrect">Неверная почта и/или пароль</div>
+    <div *ngIf="isSubmitted && formControls.email.errors" class="help-block">
+      <div *ngIf="formControls.email.errors.required">Заполните поле почты</div>
     </div>
     <p [ngClass]="{ 'has-error': isSubmitted && formControls.password.errors }">
       <input name="passwordInput" type="password" placeholder="Пароль" formControlName="password">

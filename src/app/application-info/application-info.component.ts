@@ -11,7 +11,7 @@ import { Location, NgFor } from '@angular/common';
 export class ApplicationInfoComponent {
   applicationID: any;
   currentPhoto: any;
-
+  partUser: any;
 
     constructor(private router: Router, private data: ConfigService, private route: ActivatedRoute) {
       const id = this.route.snapshot.paramMap.get('id');
@@ -19,10 +19,19 @@ export class ApplicationInfoComponent {
       .subscribe((info:any) => {
         this.applicationID = info;
         this.currentPhoto = info.photoApplications[0].photo;
+        this.partUser = this.applicationID.applicationUsers.length;
       });
     }
 
     picPhoto(photo: any) {
       this.currentPhoto = photo;
+    }
+
+    partApplication() {
+      this.data.partApplicationUser(this.applicationID.id, localStorage.getItem('AUTH_TOKEN'))
+      .subscribe(response => {
+        
+      });
+      //this.partUser = this.partUser + 1;
     }
   }

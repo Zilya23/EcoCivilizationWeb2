@@ -18,7 +18,7 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
     this.authForm  =  this.formBuilder.group({
-        login: ['', Validators.required],
+        email: ['', Validators.required],
         password: ['', Validators.required]
     });
   }
@@ -31,14 +31,14 @@ export class AuthComponent implements OnInit {
       return;
     }
     
-    var login = this.authForm.value.login;
+    var email = this.authForm.value.email;
     var password = this.authForm.value.password;
-    this.configService.authorization(login, password).subscribe(response =>
+    this.configService.authorization(email, password).subscribe(response =>
       {
         this.router.navigateByUrl('/applications');
         localStorage.setItem("AUTH_TOKEN", response.token);
       }, error => {
-        this.authForm.controls['login'].setErrors({'incorrect' : true});
+        this.authForm.controls['email'].setErrors({'incorrect' : true});
         this.authForm.controls['password'].setErrors({'incorrect' : true});
       });
   }

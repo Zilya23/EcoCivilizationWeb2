@@ -68,7 +68,7 @@ export class RegistrationComponent {
             this.authForm.controls['telephone'].setErrors({'incorrect' : true});
             }
             else{
-            alert("Ошибка! Попробуйте еще раз")
+              alert("Ошибка! Попробуйте еще раз")
             }
             }
             );

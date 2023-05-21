@@ -35,8 +35,11 @@ export class AuthComponent implements OnInit {
     var password = this.authForm.value.password;
     this.configService.authorization(email, password).subscribe(response =>
       {
-        this.router.navigateByUrl('/applications');
         localStorage.setItem("AUTH_TOKEN", response.token);
+        this.configService.getUserIdentifier(localStorage.getItem('AUTH_TOKEN')).subscribe( resp =>
+          localStorage.setItem("USER_IDENTIFIER", resp)
+        );
+        this.router.navigateByUrl('/applications');
       }, error => {
         this.authForm.controls['email'].setErrors({'incorrect' : true});
         this.authForm.controls['password'].setErrors({'incorrect' : true});

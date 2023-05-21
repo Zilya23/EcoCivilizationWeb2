@@ -18,7 +18,7 @@
         <li>
           <div>Начало:</div>
           <div></div>
-          <div>{{applicationID["timeStart"]}}</div>
+          <div>{{formattedTime}}</div>
         </li>
         <li>
           <div>Город проведения:</div>
@@ -38,7 +38,8 @@
       </ol>
       <p>Участников <span>{{partUser}}</span>  из <span>{{applicationID.countUser}}</span>:</p>
       <progress max="{{applicationID.countUser}}" value="{{partUser}}"></progress>
-      <button (click)="partApplication()">Участвовать!</button>
+      <button formControlName="btn" (click)="partApplication()">{{participant}}</button>
   </div>
 </div>
+
 

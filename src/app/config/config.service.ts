@@ -27,6 +27,11 @@ export class ConfigService {
     })
   }
 
+  public getUserIdentifier(token: any) : Observable<any> {
+    var url = this.baseUrl + 'Users/getIdentifier';
+    return this.client.post<any>(url, {userPhoto: token})
+  }
+
   public registration(name: any, surname: any, telephone: any, idCity: any, 
                       idGender: any, email: any, password: any) : Observable<any> {
     var url = this.baseUrl + 'Users/registration';
@@ -50,5 +55,19 @@ export class ConfigService {
     var url = this.baseUrl + 'ApplicationUsers';
     var head = {'token': token};
     return this.client.post<any>(url, {idApplication: idApplication}, {headers: head});
+  }
+
+  public partExists(idApplication: any, idUser: any): Observable<any> {
+    var url = this.baseUrl + 'ApplicationUsers/partExists';
+    return this.client.post<any>(url, {
+      idApplication: idApplication,
+      idUser: idUser
+    });
+  }
+
+  public deletePart(id: any, token: any) : Observable<any> {
+    var url = this.baseUrl + `ApplicationUsers/${id}`;
+    var head = {'token': token};
+    return this.client.delete<any>(url, {headers: head});
   }
 }
